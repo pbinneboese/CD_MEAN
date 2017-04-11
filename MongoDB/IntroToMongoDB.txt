@@ -1,0 +1,68 @@
+$ mongo
+> use my_first_db
+> db.createCollection('students')
+> db.students.insert({name:"Paul", home_state: "Washington", lucky_number: 7, birthday: {month: 1, day: 6, year: 1961}})
+> db.students.insert({name:"Diego", home_state: "California", lucky_number: 43, birthday: {month: 3, day: 14, year: 1981}})
+> db.students.insert({name:"Linda", home_state: "Illinois", lucky_number: 17, birthday: {month: 3, day: 17, year: 1952}})
+> db.students.insert({name:"Taylor", home_state: "New Jersey", lucky_number: 509, birthday: {month: 11, day: 4, year: 1992}})
+> db.students.insert({name:"Ian", home_state: "Florida", lucky_number: 67, birthday: {month: 8, day: 24, year: 2014}})
+> db.students.find({$or: [{home_state: "California"}, {home_state: "Washington"}]}).pretty()
+> db.students.find({lucky_number:{$gt:3}}).pretty()
+> db.students.find({lucky_number:{$lte:10}}).pretty()
+> db.students.find({$and:[{lucky_number:{$gte:1}}, {lucky_number:{$lte:9}}]}).pretty()
+> db.students.update({}, {$set: {"interests":["coding","brunch","MongoDB"]}})
+> db.students.update({}, {$set: {"interests":["coding","brunch","MongoDB"]}}, {multi:true})
+> db.students.update({name:"Paul"}, {$push: {"interests":["running","biking"]}})
+> db.students.update({name:"Diego"}, {$push: {"interests":"basketball"}})
+> db.students.update({name:"Linda"}, {$push: {"interests":"Candy Crush"}})
+> db.students.update({name:"Taylor"}, {$push: {"interests":"new baby"}})
+> db.students.update({name:"Ian"}, {$push: {"interests":"baseball caps"}})
+> db.students.update({name:"Linda"}, {$push: {"interests":"taxes"}})
+> db.students.update({name:"Linda"}, {$pull: {"interests":"taxes"}})
+> db.students.remove({home_state:"California"})
+> db.students.remove({name:"Ian"})
+> db.students.remove({lucky_number:{$gt:5}}, true)
+> db.students.update({}, {$set: {"number_of_belts":0}}, {multi:true})
+> db.students.update({home_state:"New Jersey"}, {$inc: {"number_of_belts":1}}, {multi:true})
+> db.students.update({home_state:"New Jersey"}, {$rename: {"number_of_belts":"belts_earned"}}, {multi:true})
+> db.students.update({}, {$unset: {"lucky_number":""}}, {multi:true})
+> db.students.update({}, {$currentDate: {"updated_on":true}}, {multi:true})
+
+> db.students.find({}).pretty()
+{
+	"_id" : ObjectId("58e7d1ae131b9dc452a332c8"),
+	"name" : "Linda",
+	"home_state" : "Illinois",
+	"birthday" : {
+		"month" : 3,
+		"day" : 17,
+		"year" : 1952
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"Candy Crush"
+	],
+	"number_of_belts" : 0,
+	"updated_on" : ISODate("2017-04-07T19:31:55.890Z")
+}
+{
+	"_id" : ObjectId("58e7d1e0131b9dc452a332c9"),
+	"name" : "Taylor",
+	"home_state" : "New Jersey",
+	"birthday" : {
+		"month" : 11,
+		"day" : 4,
+		"year" : 1992
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"new baby"
+	],
+	"belts_earned" : 1,
+	"updated_on" : ISODate("2017-04-07T19:31:55.890Z")
+}
+>

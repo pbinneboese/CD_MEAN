@@ -1,0 +1,13 @@
+.form{
+  display: block;
+  margin: 10px;
+  border: 2px solid green;
+  width: 400px;
+}
+tr, td{
+  border: 1px solid black;
+  padding: 10px;
+}
+img{
+  width: 250px;
+}

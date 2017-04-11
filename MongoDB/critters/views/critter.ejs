@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mongoose Detail</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+  </head>
+  <body>
+    <p><img src="/aardvark.jpg" alt="aardvark"></p>
+    <p>Aaron, our first critter</p>
+    <h3>Critter Details</h3>
+    <p>ID: <%= critter.ident %></p>
+    <p>Name: <%= critter.name %></p>
+    <p>Age: <%= critter.age %></p>
+    <p>Weight: <%= critter.weight %></p>
+    <p>Diet: <%= critter.diet %></p>
+    <form class="button" action="/<%= critter.ident %>/edit" method="get">
+      <button type="submit" name="edit">Edit Critter</button>
+    </form>
+    <p></p>
+    <form class="button" action="/<%= critter.ident %>/delete" method="post">
+      <button type="submit" name="delete">Delete Critter</button>
+    </form>
+    <p></p>
+    <form class="button" action="/" method="get">
+      <button type="submit" name="back">Home</button>
+    </form>
+    <p></p>
+  </body>
+</html>

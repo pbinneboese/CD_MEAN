@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mongoose New Critter</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+  </head>
+  <body>
+    <p><img src="/aardvark.jpg" alt="aardvark"></p>
+    <p>Aaron, our first critter</p>
+    <h3>Add New Critter</h3>
+    <form class="form" action="/critter" method="post">
+      <p>ID (between 1 and 1000):<input type="number" name="ident" min="1" max="1000"></p>
+      <p>Name (up to 40 characters):<input type="text" name="name"></p>
+      <p>Age in years (between 1 and 100):<input type="number" name="age" min="1" max="100"></p>
+      <p>Weight in pounds (between 1 and 100):<input type="number" name="weight" min="1" max="100"></p>
+      <p>Diet:<textarea name="diet" rows="4" cols="60"></textarea></p>
+      <p><button type="submit" name="save">Save</button></p>
+    </form>
+    <p></p>
+    <form class="button" action="/" method="get">
+      <button type="submit" name="back">Home</button>
+    </form>
+    <p></p>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<div>
+  <h3>Product List</h3>
+<table>
+  <thead>
+    <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Date Created</th>
+    <th>Date Updated</th>
+    <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody *ngFor='let product of products'>
+    <tr>
+    <td>{{product.name}}</td>
+    <td>{{product.description}}</td>
+    <td>{{product.price}}</td>
+    <td>{{product.quantity}}</td>
+    <td>{{product.created_at | date:'shortDate'}}</td>
+    <td>{{product.updated_at | date:'shortDate'}}</td>
+    <td><button (click)="onClick(product)">Delete</button></td>
+    <!-- <td><button (click)="onClick({{product}}, {{product.id}})" name="{{product.id}}">Delete</button></td> -->
+    </tr>
+  </tbody>
+</table>
+</div>

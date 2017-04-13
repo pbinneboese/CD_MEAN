@@ -1,0 +1,7 @@
+<div class="box">
+  <h3> Currency Formats</h3>
+  <p>USD (no format) - {{ money | currency }}</p>
+  <p>EUR (currency format) - {{ money | currency:'EUR' }}</p>
+  <p>AUS (currency 1.2 format = 2 dec values) - {{ money | currency:'AUS':true:'1.2' }}</p>
+  <p>CNY (1.0 = 0 dec values if value over '0' present) - {{ money | currency:'CNY':true:'1.0' }}</p>
+</div>

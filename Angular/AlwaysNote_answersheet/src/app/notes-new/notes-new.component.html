@@ -1,0 +1,10 @@
+<div class="container">
+	<h2>Create a new note</h2>
+	<form (submit)="create()">
+	<label>
+		Note:
+		<input type="text" [(ngModel)]="newNote.content" name="name">
+	</label>
+	<input type="submit">
+	</form>
+</div>

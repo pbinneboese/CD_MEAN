@@ -1,0 +1,6 @@
+<div>
+  <h4>Create a New Note</h4>
+  <form (submit)="onSubmit(formData)" #formData="ngForm">
+    Note: <input type="text" name="noteText" required #name="ngModel" [(ngModel)]="note.noteText">
+    <input type="submit" value="Submit">
+  </form></div>

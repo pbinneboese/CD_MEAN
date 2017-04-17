@@ -1,0 +1,8 @@
+<div>
+  <h4>Edit Note</h4>
+  <form (submit)="onSubmit()">
+    Note: <input type="text" name="noteText" [(ngModel)]="editingNote.noteText" required>
+    <input type="submit" name="button" value="Submit">
+  </form>
+  <button (click)="deselectTask()">Cancel</button>
+</div>

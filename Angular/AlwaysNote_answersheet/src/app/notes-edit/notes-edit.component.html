@@ -1,0 +1,6 @@
+<h4>Edit Note</h4>
+<form (submit)="update()">
+  <input type="text" [(ngModel)]="editingNote.content" name='content'>
+  <input type="submit">
+</form>
+<button (click)="deselectTask()">Cancel</button>

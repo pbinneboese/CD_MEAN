@@ -1,0 +1,19 @@
+<div>
+<h3>Friends-List App</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Show</th><th>Update</th><th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let friend of friends">
+      <td>{{friend.firstName}} {{friend.lastName}}</td>
+      <td><button (click)="onShow(friend)">Show</button></td>
+      <td><button (click)="onUpdate(friend)">Show</button></td>
+      <td><button (click)="onDelete(friend)">Show</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<router-outlet></router-outlet>

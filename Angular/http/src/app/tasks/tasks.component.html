@@ -1,3 +1,14 @@
-<p>
-  tasks works!
-</p>
+<h2>Tasks</h2>
+<form (submit)="createTask()" class="form">
+  Title:<input type="text" name="title" [(ngModel)]="task.title">
+  Content:<input type="text" name="content" [(ngModel)]="task.content">
+  <input type="submit" name="Submit">
+</form>
+<hr>
+<ul>
+  <li *ngFor="let task of tasks">
+  {{task.title}} - {{task.content}}
+  </li>
+</ul>
+
+<button (click)="createPromise()">Promise</button>

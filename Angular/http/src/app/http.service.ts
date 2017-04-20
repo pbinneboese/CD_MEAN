@@ -17,7 +17,7 @@ export class HttpService {
   // }
 
 
-  create(newTask: any) {
+  create(newTask: Task) {
     JSON.stringify(newTask);
     return this._http.post('https://api-http.firebaseio.com/tasks.json', newTask);
   }

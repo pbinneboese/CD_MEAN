@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Friend } from './../friend';
-import { FriendsService } from './../friends.service';
 
 @Component({
   selector: 'app-friends-show',
@@ -8,9 +7,9 @@ import { FriendsService } from './../friends.service';
   styleUrls: ['./friends-show.component.css']
 })
 export class FriendsShowComponent implements OnInit {
-  @Input() friends: Friend[];
+  @Input() showFriend: Friend;
 
-  constructor(private _friendsService: FriendsService) { }
+  constructor() { }
 
   ngOnInit() {
   }

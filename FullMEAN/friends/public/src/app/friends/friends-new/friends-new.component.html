@@ -1,3 +1,9 @@
 <div>
-<h3>Friends-New App</h3>
+<h3>Add New Friend</h3>
+<form (submit)="onCreateMade()" #formData="ngForm">
+  First Name: <input type="text" name="firstName" [(ngModel)]="newFriend.firstName" #firstName="ngModel">
+  Last Name: <input type="text" name="lastName" [(ngModel)]="newFriend.lastName" #lastName="ngModel">
+  Birthday: <input type="date" name="birthday" [(ngModel)]="newFriend.birthday" #birthday="ngModel">
+  <input type="submit" [disabled]="!formData.form.valid">
+</form>
 </div>

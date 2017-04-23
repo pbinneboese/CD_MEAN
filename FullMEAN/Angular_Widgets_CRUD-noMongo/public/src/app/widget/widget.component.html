@@ -1,0 +1,25 @@
+<h3>Widget Component</h3>
+
+<h5>New Widget</h5>
+<form (submit)="onSubmit()" #formData="ngForm">
+    <input type="text" name="name"
+        [(ngModel)]="newWidget.name"
+        #name="ngModel"/>
+    <input type="text" name="description" 
+        #description="ngModel"
+        [(ngModel)]="newWidget.description"/>
+    <input type="submit"
+        [disabled]="!formData.form.valid"/>
+</form>
+
+<h5>List Widget</h5>
+<div *ngFor="let widget of widgets">
+    <span>{{ widget.name }} - {{ widget.description }}</span>
+    <button (click)="destroy(widget)">Delete</button>
+    <button (click)="widget.editable = !widget.editable">Edit</button>
+    <app-widget-edit 
+        *ngIf="widget.editable" 
+        [widget]="widget" 
+        (updateWidgets)="getWidgets()"
+    ></app-widget-edit>
+</div>

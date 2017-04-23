@@ -1,40 +1,36 @@
 import { Injectable, Input } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Request, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
-import {Observer} from "rxjs/Observer";
 import "rxjs";
 import { Friend } from './friend';
 
 @Injectable()
 export class FriendsService {
-  @Input() friends: Friend[];
-  @Input() ShowFriend: boolean;
-  @Input() NewFriend: boolean;
-  @Input() EditFriend: boolean;
 
-  constructor(private _http: Http){ this.index() }
+  constructor(private _http: Http){ }
 
   index(){
     return this._http.get('/friends')
-    .map((response: Response) => response.json());
-    // this._http.get('/friends')
-    // .map((response)=> response.json())
-    // .subscribe((data) => this.friends = data);
+    .map(data => data.json()).toPromise()
   }
 
   show(friend: Friend){
-    this.ShowFriend = true;
+    return this._http.get("/friends/"+friend._id)
+    .map(data => data.json()).toPromise()
   }
 
   create(friend: Friend){
-    this.NewFriend = true;
-    this._http.post('/friends', friend)
-    .subscribe((response)=> this.index());
+    return this._http.post("/friends", friend)
+    .map(data => data.json()).toPromise()
   }
 
-  destroy(friend: Friend){ }
+  update(friend: Friend, editFriend: Friend){
+    return this._http.put("/friends/"+friend._id, editFriend)
+    .map(data => data.json()).toPromise()
+  }
 
-  update(friend: Friend, editedFriend:Friend, done){
-    this.EditFriend = true;
+  delete(friend: Friend){
+    return this._http.delete("/friends/"+friend._id)
+    .map(data => data.json()).toPromise()
   }
 }

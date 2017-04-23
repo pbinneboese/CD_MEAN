@@ -10,7 +10,6 @@ import { FriendsNewComponent } from './friends/friends-new/friends-new.component
 import { FriendsEditComponent } from './friends/friends-edit/friends-edit.component';
 import { FriendsShowComponent } from './friends/friends-show/friends-show.component';
 import { FriendsService } from './friends/friends.service';
-import { routing } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -24,8 +23,7 @@ import { routing } from './app.routes';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    routing
+    HttpModule
   ],
   providers: [FriendsService],
   bootstrap: [AppComponent]

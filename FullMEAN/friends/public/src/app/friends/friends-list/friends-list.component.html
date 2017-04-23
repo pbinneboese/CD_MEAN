@@ -9,11 +9,13 @@
   <tbody>
     <tr *ngFor="let friend of friends">
       <td>{{friend.firstName}} {{friend.lastName}}</td>
-      <td><button (click)="onShow(friend)">Show</button></td>
-      <td><button (click)="onUpdate(friend)">Show</button></td>
-      <td><button (click)="onDelete(friend)">Show</button></td>
+      <td><button (click)="onShowButton(friend)">Show</button></td>
+      <td><button (click)="onUpdateButton(friend)">Update</button></td>
+      <td><button (click)="onDeleteButton(friend)">Delete</button></td>
     </tr>
   </tbody>
 </table>
+<button (click)="onNewButton()">Add New</button>
 </div>
-<router-outlet></router-outlet>
+
+<!-- <app-friends-edit> *ngIf="friend.editable" [friend]="friend" (updateFriends)="getFriends()"</app-friends-edit> -->

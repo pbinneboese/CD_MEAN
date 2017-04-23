@@ -1,13 +1,16 @@
 export class Friend {
-  firstName: string;
-  lastName: string;
-  birthday: Date;
-  _id: string;
-  createdAt: Date;
-
-  constructor(firstName, lastName, birthday) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.birthday = birthday;
-  }
+  public _id: string
+  public firstName: string = ""
+  public lastName: string = ""
+  public birthday: Date
+  public createdAt: Date
+  // public editable: boolean = false
+  // constructor(
+  //   public firstName: string = "",
+  //   public lastName: string = "",
+  //   public birthday: Date,
+  //   public id: string,
+  //   public createdAt: Date,
+  //   public editable: boolean = false
+  // ) {}
 }

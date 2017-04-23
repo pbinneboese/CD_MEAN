@@ -1,0 +1,8 @@
+<h5>Edit Widget</h5>
+<form (submit)="onUpdate()">
+  <input type="text" name="name"
+    [(ngModel)]="editableWidget.name"/>
+  <input type="text" name="description"
+    [(ngModel)]="editableWidget.description"/>
+  <input type="submit">
+</form>

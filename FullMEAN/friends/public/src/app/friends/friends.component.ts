@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+// import {Router, ActivatedRoute, Params} from '@angular/router';
 import { FriendsService } from './friends.service';
 import { Friend } from './friend';
 
@@ -9,39 +9,92 @@ import { Friend } from './friend';
   styleUrls: ['./friends.component.css']
 })
 export class FriendsComponent implements OnInit {
-  friends: Array<Friend> = [];
-  // [
-  //   {firstName:"Paul", lastName:"Binneboese", birthday:new Date(1961, 01, 06), createdAt:new Date()},
-  // 	{firstName:"Captain", lastName:"Bligh", birthday:new Date(1868, 01, 01), createdAt:new Date()},
-  // 	{firstName:"George", lastName:"Washington", birthday:new Date(1745, 12, 31), createdAt:new Date()}
-  // ];
-  ShowFriend: boolean = false;
-  NewFriend: boolean = false;
-  EditFriend: boolean = false;
+  friends: Array<Friend>;
 
-  constructor(private _friendsService: FriendsService,
-    private route: ActivatedRoute, private router: Router) { }
+  constructor(private _friendsService: FriendsService) { }
+
+  showFriend: Friend;
+  newFriend: Friend;
+  editFriend: Friend;
+  originalFriend: Friend;
 
   ngOnInit() {
-    this.getFriends();
-    this.route.params.subscribe((param) => {	// subscribe to friend ID in path
-    console.log("subscription", param.id);
-    });
+    this.index();
   }
-  getFriends(){   // get full friends list
+
+  // **** for non-HTTP operation ****
+  // friends: Array<Friend> =
+  // [
+  //   {firstName:"Paul", lastName:"Binneboese", birthday:new Date(1961, 01, 06), createdAt:new Date()},
+  // 	{firstName:"Captain", lastName:"Bligh", birthday:new Date(1868, 01, 01), createdAt:new Date())},
+  // 	{firstName:"George", lastName:"Washington", birthday:new Date(1745, 12, 31), createdAt:new Date()}
+  //   // new Friend(firstName:"Paul", lastName:"Binneboese", birthday:new Date(1961, 01, 06), createdAt:new Date()),
+  // 	// new Friend(firstName:"Captain", lastName:"Bligh", birthday:new Date(1868, 01, 01), createdAt:new Date()),
+  // 	// new Friend(firstName:"George", lastName:"Washington", birthday:new Date(1745, 12, 31), createdAt:new Date())
+  // ];
+
+  // **** for non-HTTP operation ****
+  // index(){ }
+  //
+  // show(friend){ }
+  //
+  // create(friend: Friend){
+  //   this.friends.push(friend);
+  // }
+  //
+  // update(editFriend: Friend){
+  //   console.log(editFriend, originalFriend);
+  //   const i = this.friends.indexOf(originalFriend);
+  //   this.friends[i] = editFriend;
+  // }
+  //
+  // delete(friend: Friend){
+  //   const i = this.friends.indexOf(friend);
+  //   this.friends.splice(i, 1);
+  // }
+
+  // **** for HTTP operation ****
+  index(){   // get full friends list
     this._friendsService.index()
-    .toPromise()
-    .then(data => { // got it
-      console.log("server friends", data);
+    .then(data => {
       this.friends = data;
+      // hide the subcomponents
+      this.showFriend = null;
+      this.newFriend = null;
+      this.editFriend = null;
+      this.originalFriend = null;
     })
-    .catch( err => {
-      console.log("server error", err);
-    })
+    .catch(err => console.log(err));
   }
-  updateFriendsParent(){  // re-fetch full friends list upon update
-  	this.getFriends();
+
+  show(friend: Friend){
+    console.log("showing friend", friend);
+    this._friendsService.show(friend)
+    .then(response => this.index())
+    .catch(err => console.log(err));
   }
+
+  create(friend: Friend){
+    console.log("creating friend", friend);
+    this._friendsService.create(friend)
+    .then(response => this.index())
+    .catch(err => console.log(err));
+  }
+
+  update(editFriend: Friend){
+    console.log("updating friend", this.originalFriend, editFriend);
+    this._friendsService.update(this.originalFriend, editFriend)
+    .then(response => this.index())
+    .catch(err => console.log(err));
+  }
+
+  delete(friend: Friend){
+    console.log("deleting friend", friend);
+    this._friendsService.delete(friend)
+    .then(response => this.index())
+    .catch(err => console.log(err));
+  }
+
   // onAnEvent() {
   //   this.router.navigate(['otherRoute']);		// reroutes on a defined event
   // }

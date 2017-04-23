@@ -3,7 +3,7 @@ var fs = require("fs")
 var path = require("path")
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;  // override Mongoose deprecated Promise operator
-// mongoose.connect('mongodb://localhost/friends_db'); // connect to basic_mongoose database
+mongoose.connect('mongodb://localhost/friends_db'); // connect to basic_mongoose database
 
 var models_path = path.join(__dirname, "../models")
 fs.readdirSync(models_path).forEach(function(file){

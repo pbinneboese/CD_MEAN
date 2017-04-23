@@ -1,3 +1,9 @@
 <div>
-<h3>Friends-Edit App</h3>
+<h3>Update Friend</h3>
+<form (submit)="onUpdateMade()" #formData="ngForm">
+  First Name: <input type="text" name="firstName" [(ngModel)]="editFriend.firstName" #firstName="ngModel">
+  Last Name: <input type="text" name="lastName" [(ngModel)]="editFriend.lastName" #lastName="ngModel">
+  Birthday: <input type="date" name="birthday" [(ngModel)]="editFriend.birthday" #birthday="ngModel">
+  <input type="submit" [disabled]="!formData.form.valid">
+</form>
 </div>

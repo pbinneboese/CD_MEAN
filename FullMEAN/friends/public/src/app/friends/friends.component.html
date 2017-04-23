@@ -1,15 +1,7 @@
 <div>
 <h3>Friends App</h3>
 <app-friends-list [friends]="friends"></app-friends-list>
-<app-friends-show *ngIf="ShowFriend" [friend]="friend"></app-friends-show>
-<app-friends-new *ngIf="NewFriend" [friend]="friend"  (updateFriends)="updateFriendsParent()"></app-friends-new>
-<app-friends-edit *ngIf="EditFriend" [friend]="friend" (updateFriends)="updateFriendsParent()"></app-friends-edit>
-<!-- {{ friends | json }} -->
+<app-friends-show *ngIf="showFriend" [showFriend]="showFriend"></app-friends-show>
+<app-friends-new *ngIf="newFriend" [newFriend]="newFriend" (createNewFriendEvent)="create($event)"></app-friends-new>
+<app-friends-edit *ngIf="editFriend" [editFriend]="editFriend" (editFriendEvent)="update($event)"></app-friends-edit>
 </div>
-<!-- <a [routerLink]="['list']">List</a>
-<a [routerLink]="['show']">Show</a>
-<a [routerLink]="['new']">New</a>
-<a [routerLink]="['edit']">Edit</a>
-<hr> -->
-<!-- <router-outlet [friends]="friends" (updateFriends)="updateFriendsParent()"></router-outlet> -->
-<!-- <router-outlet></router-outlet> -->

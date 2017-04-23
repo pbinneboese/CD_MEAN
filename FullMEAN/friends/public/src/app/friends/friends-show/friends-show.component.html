@@ -1,4 +1,5 @@
 <div>
+  <h3>Show Friend</h3>
   <table>
     <thead>
       <tr>
@@ -7,10 +8,10 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{friend.firstName}}</td>
-        <td>{{friend.lastName}}</td>
-        <td>{{friend.birthday | date:"shortdate"}}</td>
-        <td>{{friend.createdAt}}</td>
+        <td>{{showFriend.firstName}}</td>
+        <td>{{showFriend.lastName}}</td>
+        <td>{{showFriend.birthday | date:'mediumDate'}}</td>
+        <td>{{showFriend.createdAt | date:'mediumDate'}}</td>
       </tr>
     </tbody>
   </table>

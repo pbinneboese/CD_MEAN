@@ -1,0 +1,9 @@
+<div>
+<h3>Add New User</h3>
+<form (submit)="onCreateMade()" #formData="ngForm">
+  First Name: <input type="text" name="firstName" [(ngModel)]="newUser.firstName" #firstName="ngModel">
+  Last Name: <input type="text" name="lastName" [(ngModel)]="newUser.lastName" #lastName="ngModel">
+  Birthday: <input type="date" name="birthday" [(ngModel)]="newUser.birthday" #birthday="ngModel">
+  <input type="submit" [disabled]="!formData.form.valid">
+</form>
+</div>

@@ -1,0 +1,27 @@
+<div>
+<fieldset *ngIf="loggedOut">
+  <legend>Account Login</legend>
+  <form (submit)="onLogin()" #formData="ngForm">
+    Email: <input type="text" name="email" [(ngModel)]="account.email" #email="ngModel">
+    Password: <input type="password" name="password" [(ngModel)]="account.password" #password="ngModel">
+    <button type="submit" [disabled]="!formData.form.valid">Login</button>
+  </form>
+</fieldset>
+<fieldset *ngIf="loggedOut">
+  <legend>New Account? Register Here</legend>
+  <form (submit)="onRegister()" #formData="ngForm">
+    Email: <input type="text" name="email" [(ngModel)]="account.email" #email="ngModel">
+    First Name: <input type="text" name="firstName" [(ngModel)]="account.firstName" #firstName="ngModel">
+    Last Name: <input type="text" name="lastName" [(ngModel)]="account.lastName" #lastName="ngModel">
+    Birthday: <input type="date" name="birthday" [(ngModel)]="account.birthday" #birthday="ngModel">
+    Password: <input type="password" name="password" [(ngModel)]="account.password" #password="ngModel">
+    Confirm Password: <input type="password" name="password2" [(ngModel)]="password2" #password_2="ngModel">
+    <button type="submit" [disabled]="!formData.form.valid">Register</button>
+  </form>
+</fieldset>
+<button (click)="onLogout()">Logout</button>
+</div>
+<!-- flash any error messages -->
+<ul>
+  <li *ngIf="errorMessage">Error: {{ errorMessage}}</li>
+</ul>

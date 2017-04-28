@@ -1,0 +1,3 @@
+<h3 *ngIf="loggedIn">Welcome, {{currentAccount.email}}</h3>
+<app-login [loggedOut]="loggedOut" [errorMessage]="errorMessage"></app-login>
+<app-users *ngIf="loggedIn"></app-users>

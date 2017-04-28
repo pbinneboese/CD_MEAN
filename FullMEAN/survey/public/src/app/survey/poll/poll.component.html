@@ -1,0 +1,30 @@
+<div *ngIf="survey">
+<h3>Take Survey</h3>
+<h4>Question: {{survey.question}}</h4>
+<p>Click the Vote button to choose one.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Option</th><th>Current Vote Count</th><th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{survey.option1}}</td><td>{{survey.vote1}}</td>
+      <td><button (click)="onVoteButton(1)">Vote</button></td>
+    </tr>
+    <tr>
+      <td>{{survey.option2}}</td><td>{{survey.vote2}}</td>
+      <td><button (click)="onVoteButton(2)">Vote</button></td>
+    </tr>
+    <tr>
+      <td>{{survey.option3}}</td><td>{{survey.vote3}}</td>
+      <td><button (click)="onVoteButton(3)">Vote</button></td>
+    </tr>
+    <tr>
+      <td>{{survey.option4}}</td><td>{{survey.vote4}}</td>
+      <td><button (click)="onVoteButton(4)">Vote</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>

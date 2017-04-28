@@ -1,0 +1,9 @@
+<div>
+<h3>Update User</h3>
+<form (submit)="onUpdateMade()" #formData="ngForm">
+  First Name: <input type="text" name="firstName" [(ngModel)]="editUser.firstName" #firstName="ngModel">
+  Last Name: <input type="text" name="lastName" [(ngModel)]="editUser.lastName" #lastName="ngModel">
+  Birthday: <input type="date" name="birthday" [(ngModel)]="editUser.birthday" #birthday="ngModel">
+  <input type="submit" [disabled]="!formData.form.valid">
+</form>
+</div>

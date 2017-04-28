@@ -1,0 +1,11 @@
+<div>
+<h3>Add New Item</h3>
+<form (submit)="onCreateMade()" #formData="ngForm">
+  First Name: <input type="text" name="firstName" [(ngModel)]="newItem.firstName" #firstName="ngModel">
+  Last Name: <input type="text" name="lastName" [(ngModel)]="newItem.lastName" #lastName="ngModel">
+  Birthday: <input type="date" name="birthday" [(ngModel)]="newItem.birthday" #birthday="ngModel">
+  Email: <input type="text" name="email" [(ngModel)]="newItem.email" #email="ngModel">
+  Password: <input type="text" name="password" [(ngModel)]="newItem.password" #password="ngModel">
+  <input type="submit" [disabled]="!formData.form.valid">
+</form>
+</div>

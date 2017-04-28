@@ -1,0 +1,21 @@
+<div>
+<h3>Users-List App</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Show</th><th>Update</th><th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.firstName}} {{user.lastName}}</td>
+      <td><button (click)="onShowButton(user)">Show</button></td>
+      <td><button (click)="onUpdateButton(user)">Update</button></td>
+      <td><button (click)="onDeleteButton(user)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+<button (click)="onNewButton()">Add New</button>
+</div>
+
+<!-- <app-users-edit> *ngIf="user.editable" [user]="user" (updateUsers)="getUsers()"</app-users-edit> -->

@@ -1,0 +1,11 @@
+<div>
+<h3>Update Item</h3>
+<form (submit)="onUpdateMade()" #formData="ngForm">
+  First Name: <input type="text" name="firstName" [(ngModel)]="editItem.firstName" #firstName="ngModel">
+  Last Name: <input type="text" name="lastName" [(ngModel)]="editItem.lastName" #lastName="ngModel">
+  Birthday: <input type="date" name="birthday" [(ngModel)]="editItem.birthday" #birthday="ngModel">
+  Email: <input type="text" name="email" [(ngModel)]="editItem.email" #email="ngModel">
+  Password: <input type="text" name="password" [(ngModel)]="editItem.password" #password="ngModel">
+  <input type="submit" [disabled]="!formData.form.valid">
+</form>
+</div>

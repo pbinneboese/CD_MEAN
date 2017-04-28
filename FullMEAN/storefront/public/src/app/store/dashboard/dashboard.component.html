@@ -1,0 +1,17 @@
+<div>
+<h3>Dashboard</h3>
+<h4>New Products</h4>
+<ul>
+  <li *ngFor="let product of productsNew">Name: {{product.name}}, Qty: {{product.qty}}</li>
+</ul>
+<hr>
+<h4>Recent Orders</h4>
+<ul>
+  <li *ngFor="let order of ordersNew">Order#: {{order.orderNum}}, Qty: {{order.qty}}</li>
+</ul>
+<hr>
+<h4>New Customers</h4>
+<ul>
+  <li *ngFor="let customer of customersNew">Name: {{customer.name}}, Date: {{customer.createdAt | date:'mediumDate'}}</li>
+</ul>
+</div>

@@ -1,0 +1,23 @@
+<div [ngSwitch]="selectedView">
+<h3>Surveys App</h3>
+<app-login *ngSwitchCase="'Login'" [loggedIn]="loggedIn" [loggedOut]="loggedOut" [currentUserName]="currentUserName"></app-login>
+<!-- Only show survey apps when logged in -->
+<div *ngIf="loggedIn">
+  <button (click)="onSelectLogin()">Account</button>
+  <button (click)="onSelectList()">List Surveys</button>
+  <button (click)="onSelectCreate()">Create Survey</button>
+  <!-- <button (click)="onSelectPoll()">Take Poll</button> -->
+  <app-list *ngSwitchCase="'List'"></app-list>
+  <app-create *ngSwitchCase="'Create'"></app-create>
+  <app-poll *ngSwitchCase="'Poll'" ></app-poll>
+</div>
+<div class="green">
+  <p>Current Accounts:</p>
+  <ul>
+    <li *ngFor="let account of accounts">{{account.userName}}</li>
+  </ul>
+</div>
+<!-- flash any error messages -->
+<div *ngIf="errorMessage">
+  <h5 class="red">Error: {{errorMessage}}</h5>
+</div>

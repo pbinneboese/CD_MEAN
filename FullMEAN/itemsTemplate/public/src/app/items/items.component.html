@@ -1,0 +1,7 @@
+<div>
+<h3>Items App</h3>
+<app-items-list [items]="items"></app-items-list>
+<app-items-show *ngIf="showItem" [showItem]="showItem"></app-items-show>
+<app-items-new *ngIf="newItem" [newItem]="newItem" (createNewItemEvent)="create($event)"></app-items-new>
+<app-items-edit *ngIf="editItem" [editItem]="editItem" (editItemEvent)="update($event)"></app-items-edit>
+</div>

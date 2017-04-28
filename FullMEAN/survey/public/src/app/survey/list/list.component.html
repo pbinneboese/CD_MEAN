@@ -1,0 +1,19 @@
+<div>
+<h3>Survey Listing</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Survey Question</th><th>Date Posted</th><th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let survey of surveys">
+      <td>{{survey.userName}}</td>
+      <td>{{survey.question}}</td>
+      <td>{{survey.createdAt|date:'mediumDate'}}</td>
+      <td><button (click)="onSelectButton(survey)">Select</button>
+      <button (click)="onDeleteButton(survey)">Remove</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,7 @@
+<div>
+<h3>Users App</h3>
+<app-users-list [users]="users"></app-users-list>
+<app-users-show *ngIf="showUser" [showUser]="showUser"></app-users-show>
+<app-users-new *ngIf="newUser" [newUser]="newUser" (createNewUserEvent)="create($event)"></app-users-new>
+<app-users-edit *ngIf="editUser" [editUser]="editUser" (editUserEvent)="update($event)"></app-users-edit>
+</div>

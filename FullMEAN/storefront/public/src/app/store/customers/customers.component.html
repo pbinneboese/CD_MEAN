@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let customer of customers">
+    <tr *ngFor="let customer of this._storeComponent.customers">
       <td>{{customer.name}}</td><td>{{customer.email}}</td><td>{{customer.createdAt | date:'mediumDate'}}</td>
       <td><button (click)="onDeleteButton(customer)">Remove</button></td>
     </tr>

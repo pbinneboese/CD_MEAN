@@ -33,6 +33,7 @@ export class StoreComponent implements OnInit {
   //   new Customer("Paul Binneboese", "pbinneboese@mac.com")
   // ];
 
+  selectedView: string;
   selectDashboard: boolean;
   selectOrders: boolean;
   selectCustomers: boolean;
@@ -43,57 +44,31 @@ export class StoreComponent implements OnInit {
   ngOnInit() {
     this.onSelectDashboard(); // show dashboard at beginning
     // fetch all databases - products, orders, customers
-    this._storeService.indexProduct()
-    .then(data => {
-      this.products = data;
-      // console.log("products:", this.products);
-    })
-    .catch(err => console.log(err));
-
-    this._storeService.indexOrder()
-    .then(data => {
-      this.orders = data;
-      // console.log("orders:", this.orders);
-    })
-    .catch(err => console.log(err));
-
-    this._storeService.indexCustomer()
-    .then(data => {
-      this.customers = data;
-      // console.log("products:", this.products);
-    })
-    .catch(err => console.log(err));
+    this.indexProduct();
+    // console.log("products:", this.products);
+    this.indexOrder();
+    // console.log("orders:", this.orders);
+    this.indexCustomer();
+    // console.log("products:", this.products);
   }
 
 // **** Store View Selector ****
-  onSelectDashboard() {
-    console.log("Dashboard");
-    this.selectDashboard = true;
-    this.selectOrders = false;
-    this.selectCustomers = false;
-    this.selectProducts = false;
-  }
-  onSelectOrders() {
-    console.log("Orders");
-    this.selectDashboard = false;
-    this.selectOrders = true;
-    this.selectCustomers = false;
-    this.selectProducts = false;
-  }
-  onSelectCustomers() {
-    console.log("Customers");
-    this.selectDashboard = false;
-    this.selectOrders = false;
-    this.selectCustomers = true;
-    this.selectProducts = false;
-  }
-  onSelectProducts() {
-    console.log("Products");
-    this.selectDashboard = false;
-    this.selectOrders = false;
-    this.selectCustomers = false;
-    this.selectProducts = true;
-  }
+onSelectDashboard() {
+  console.log("Dashboard");
+  this.selectedView = "Dashboard";
+}
+onSelectOrders() {
+  console.log("Orders");
+  this.selectedView = "Orders";
+}
+onSelectCustomers() {
+  console.log("Customers");
+  this.selectedView = "Customers";
+}
+onSelectProducts() {
+  console.log("Products");
+  this.selectedView = "Products";
+}
 
   // **** Products: for non-HTTP operation ****
   // indexProduct(){
@@ -124,7 +99,6 @@ export class StoreComponent implements OnInit {
     this._storeService.indexProduct()
     .then(data => {
       this.products = data;
-      this.products = this.products;
       // console.log("products:", this.products);
     })
     .catch(err => console.log(err));
@@ -187,7 +161,6 @@ export class StoreComponent implements OnInit {
     this._storeService.indexOrder()
     .then(data => {
       this.orders = data;
-      this.orders = this.orders;
       // console.log("orders:", this.orders);
     })
     .catch(err => console.log(err));
@@ -250,7 +223,6 @@ export class StoreComponent implements OnInit {
     this._storeService.indexCustomer()
     .then(data => {
       this.customers = data;
-      this.customers = this.customers;
       // console.log("customers:", this.customers);
     })
     .catch(err => console.log(err));

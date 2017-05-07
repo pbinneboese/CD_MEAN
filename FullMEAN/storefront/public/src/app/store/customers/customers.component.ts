@@ -12,7 +12,7 @@ import { StoreComponent } from './../store.component';
 })
 export class CustomersComponent implements OnInit {
   // @Input() customers: Array<Customer>;
-  customers: Array<Customer>;
+  // customers: Array<Customer>;
   newCustomer: Customer;
   showCustomer: Customer;
   editCustomer: Customer;
@@ -22,7 +22,7 @@ export class CustomersComponent implements OnInit {
     private _storeService: StoreService) { }
 
   ngOnInit() {
-    this.customers = this._storeComponent.customers;
+    // this.customers = this._storeComponent.customers;
     this.newCustomer = new Customer("", "");
   }
 

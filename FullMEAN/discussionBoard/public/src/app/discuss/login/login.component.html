@@ -1,0 +1,14 @@
+<div *ngIf="loggedIn">
+  <h5>
+    Current User: {{currentUserName}}
+    <button (click)="onLogout()">Logout</button>
+  </h5>
+</div>
+
+<fieldset *ngIf="loggedOut">
+  <legend>Account Login</legend>
+  <form (submit)="onLogin()" #formData="ngForm">
+    User Name: <input type="text" name="userName" [(ngModel)]="account.userName" #userName="ngModel">
+    <button type="submit" [disabled]="!formData.form.valid">Login</button>
+  </form>
+</fieldset>

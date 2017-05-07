@@ -65,18 +65,33 @@ var Order = mongoose.model("Order");
 		index: function(req, res) {
 			console.log('list /order');
 			// fetch orders collection from database
+			// Order.find({}, function(err, orders) {
+			// 	if(err) { // error handling callback
+			// 		console.log('DB read error', err);
+			// 		orders = {}; // blank out the orders
+			// 		res.json(err);
+			// 	}
+			// 	else {
+			// 		// console.log('Orders', orders);
+			// 		res.json(orders);
+			// 	}
+			// })
 			Order.find({}, function(err, orders) {
-				if(err) { // error handling callback
-					console.log('DB read error', err);
-					orders = {}; // blank out the orders
-					res.json(err);
-				}
-				else {
-					// console.log('Orders', orders);
-					res.json(orders);
-				}
+				var opts = [{path: '_product', model: 'Product'}, {path: '_customer', model: 'Customer'}];
+				Order.populate(orders, opts, function(err, orders) {
+					if(err) { // error handling callback
+						console.log('DB read error', err);
+						orders = {}; // blank out the orders
+						res.json(err);
+					}
+					else {
+						// console.log('Orders', orders);
+						res.json(orders);
+					}
+				});
 			})
 		},
+
 		// Show Order Detail route
 		show: function(req, res) {
 			var id = req.params.id;

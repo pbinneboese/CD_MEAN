@@ -14,9 +14,6 @@ export class DashboardComponent implements OnInit {
   // @Input() orders: Array<Order>;
   // @Input() customers: Array<Customer>;
   // @Input() products: Array<Product>;
-  ordersNew: Array<Order>;
-  customersNew: Array<Customer>;
-  productsNew: Array<Product>;
 
   constructor(private _storeComponent: StoreComponent) { }
 
@@ -25,9 +22,7 @@ export class DashboardComponent implements OnInit {
   }
 
   index() {
-    this.ordersNew = this._storeComponent.orders;
-    this.customersNew = this._storeComponent.customers;
-    this.productsNew = this._storeComponent.products;
+
   }
 
 }

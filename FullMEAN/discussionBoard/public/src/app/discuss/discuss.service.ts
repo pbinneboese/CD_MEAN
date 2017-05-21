@@ -35,4 +35,14 @@ export class DiscussService {
     .map(data => data.json()).toPromise()
   }
 
+  showAccount(account: Account){
+    return this._http.get("/account/"+account._id)
+    .map(data => data.json()).toPromise()
+  }
+
+  updateAccount(account: Account, editAccount: Account){
+    return this._http.put("/account/"+account._id, editAccount)
+    .map(data => data.json()).toPromise()
+  }
+
 }

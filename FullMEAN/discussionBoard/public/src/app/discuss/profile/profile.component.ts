@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Account } from '../account';
+import { DiscussComponent } from './../discuss.component';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  selAccount: Account;
+
+  constructor(private _discussComponent: DiscussComponent) { }
 
   ngOnInit() {
+    this.selAccount = this._discussComponent.selectedAccount;
   }
 
 }

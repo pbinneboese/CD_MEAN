@@ -11,5 +11,8 @@ export class Account {
     // this._id = "";
     this.userName = userName;
     this.password = password;
+    this.topicCount = 0;
+    this.answerCount = 0;
+    this.commentCount = 0;
   }
 }

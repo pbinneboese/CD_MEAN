@@ -134,6 +134,8 @@ module.exports = {
 			}
 			else {	// update topic
 				Object.assign(topic, updateTopic);
+				// console.log("OTopic", topic._id);
+				// console.log("UTopic", updateTopic._id);
 				topic.save(function(err) {
 					if(err) { // error handling callback
 						console.log('DB write error', err);
@@ -162,6 +164,65 @@ module.exports = {
 		})
 	},
 
+	// getAccounts route
+	getAccounts: function(req, res) {
+		console.log('listall /account');
+		// fetch accounts collection from database
+		Account.find({}, function(err, accounts) {
+			if(err) { // error handling callback
+				console.log('DB read error', err);
+				accounts = {}; // blank out the accounts
+				res.json(err);
+			}
+			else {
+				// console.log('accounts', accounts);
+				res.json(accounts);
+			}
+		})
+	},
+	// Show Account Detail route
+	showAccount: function(req, res) {
+		var id = req.params.id;
+		console.log('show /account', id);
+		Account.findOne({_id:id}, function(err, account) {
+			if(err) { // error handling callback
+				console.log('DB read error', err);
+				account = {}; // blank out the account
+				res.json(err);
+			}
+			else {
+				// console.log('Account', account);
+				res.json(account);
+			}
+		})
+	},
+	// Update Account route
+	updateAccount: function(req, res) {
+		var id = req.params.id;
+		var updateAccount = req.body;
+		console.log('update /account', id);
+		// see if account already exists
+		Account.findOne({_id:id}, function(err, account) {
+			if(err) { // error handling callback
+				console.log('Account not found', err);
+				account = {};	// blank out the account
+				res.json(err);
+			}
+			else {	// update account
+				Object.assign(account, updateAccount);
+				account.save(function(err) {
+					if(err) { // error handling callback
+						console.log('DB write error', err);
+						res.json(err);
+					} else {
+						console.log('account updated');
+						res.json(account);
+					}
+				})
+			}
+		})
+	},
+
 	// Login/Register Account route
 	login: function(req, res) {
 		var account = req.body;
@@ -176,18 +237,15 @@ module.exports = {
 		// see if account already exists
 		Account.findOne({userName:account.userName}, function(err, thisAccount) {
 			if(thisAccount) { // login account
-				console.log('login successful', account.userName);
-				req.session.userName = account.userName;	// save in session
-				res.json(req.session.userName);
-				// no password validation for this one
-				// if (thisAccount.password == account.password)	{	// validated
-				// 	console.log('login successful', account.userName);
-				// 	req.session.userName = account.userName;	// save in session
-				// 	res.json(req.session.userName);
-				// } else {
-				// 	console.log('login fail');
-				// 	res.json(false);
-				// }
+				// check for valid password
+				if (thisAccount.password == account.password)	{	// validated
+					console.log('login successful', account.userName);
+					req.session.userName = account.userName;	// save in session
+					res.json(req.session.userName);
+				} else {
+					console.log('login fail');
+					res.json(false);
+				}
 			}
 			else {	// add new account
 				var newAccount = new Account(account);
@@ -226,22 +284,6 @@ module.exports = {
 		else {
 			res.json(false);
 		}
-	},
-	// getAccounts route
-	getAccounts: function(req, res) {
-		console.log('list /account');
-		// fetch accounts collection from database
-		Account.find({}, function(err, accounts) {
-			if(err) { // error handling callback
-				console.log('DB read error', err);
-				accounts = {}; // blank out the accounts
-				res.json(err);
-			}
-			else {
-				// console.log('accounts', accounts);
-				res.json(accounts);
-			}
-		})
 	}
 
 }

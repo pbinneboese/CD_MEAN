@@ -15,6 +15,7 @@ export class DiscussComponent implements OnInit {
   topics: Array<Topic> = [];
   accounts: Array<Account> = [];
   selectedTopic: Topic;
+  selectedAccount: Account;
 
   currentUserName: string;
   loggedIn: boolean = false;
@@ -40,10 +41,10 @@ export class DiscussComponent implements OnInit {
     private _http: Http) { }
 
   ngOnInit() {
-    // this.checkLogin();
+    this.checkLogin();
     this.onSelectLogin(); // show dashboard at beginning
-    // this.getAccounts(); // fetch all accounts
-    // this.index(); // fetch all topics
+    this.getAccounts(); // fetch all accounts
+    this.index(); // fetch all topics
   }
 
   // **** View Selector ****
@@ -124,34 +125,76 @@ export class DiscussComponent implements OnInit {
     .catch(err => console.log(err));
   }
 
-  // register(account: Account){
-  //   console.log("register account", account);
-  //   this._http.post("/login", account)
-  //   .map(data => data.json()).toPromise()
-  //   .then(response => {
-  //     if (response) {
-  //       this.loggedIn = true;
-  //       this.loggedOut = false;
-  //       this.currentUserName = response;
-  //     }
-  //     else {
-  //       this.errorMessage = "registration failed, try again";
-  //     }
-  //     this.loggedIn = true;
-  //     this.loggedOut = false;
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //     this.errorMessage = "registration failed, try again";
-  //    })
-  // }
+  findAccountByUser(user: string): Account {
+    for (let account of this.accounts) {
+      if (account.userName === user) {
+        return account;
+      }
+    }
+    return null;
+  }
+
+  updateAccount(originalAccount: Account, editAccount: Account){  // update account with new counts
+    console.log("updating Account", originalAccount.userName);
+    console.log("new counts:", editAccount.topicCount, editAccount.answerCount, editAccount.commentCount);
+    this._discussService.updateAccount(originalAccount, editAccount)
+    .then(response => {
+      this.getAccounts();
+      // this._discussService.showAccount(originalAccount) // re-fetch account data
+      // .then(data => {
+      //   editAccount = data;
+      //   originalAccount = Object.assign({}, this.findAccountByUser(editAccount.userName));
+      // })
+      // .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+  }
+
+  getAccounts(){   // get full list of accounts at beginning
+    console.log("get accounts");
+    this._http.get("/account")
+    .map(data => data.json()).toPromise()
+    .then(data => {
+      this.accounts = data;
+      this.errorMessage = "";
+    })
+    .catch(err => {
+      console.log(err);
+      this.errorMessage = "cannot get accounts";
+    })
+  }
+
+  register(account: Account){
+    console.log("register account", account);
+    this._http.post("/login", account)
+    .map(data => data.json()).toPromise()
+    .then(response => {
+      console.log("Response:", response);
+      if (response != false) {
+        this.loggedIn = true;
+        this.loggedOut = false;
+        this.currentUserName = response;
+        this.getAccounts(); // update list after new registration
+      }
+      else {
+        this.errorMessage = "registration failed, try again";
+      }
+      this.loggedIn = true;
+      this.loggedOut = false;
+    })
+    .catch(err => {
+      console.log(err);
+      this.errorMessage = "registration failed, try again";
+     })
+  }
 
   login(account: Account){
     console.log("login account", account.userName);
     this._http.post("/login", account)
     .map(data => data.json()).toPromise()
     .then(response => {
-      if (response) {
+      console.log("Response:", response);
+      if (response != false) {
         this.loggedIn = true;
         this.loggedOut = false;
         this.currentUserName = account.userName;
@@ -165,7 +208,6 @@ export class DiscussComponent implements OnInit {
       console.log(err);
       this.errorMessage = "login failed, try again";
     })
-    this.getAccounts(); // update list after new logins/registrations
   }
 
   logout(){
@@ -202,20 +244,6 @@ export class DiscussComponent implements OnInit {
       }
     })
     .catch(err => console.log(err));
-  }
-
-  getAccounts(){   // get full list of accounts
-    console.log("get accounts");
-    this._http.get("/account")
-    .map(data => data.json()).toPromise()
-    .then(data => {
-      this.accounts = data;
-      this.errorMessage = "";
-    })
-    .catch(err => {
-      console.log(err);
-      this.errorMessage = "cannot get accounts";
-    })
   }
 
 }

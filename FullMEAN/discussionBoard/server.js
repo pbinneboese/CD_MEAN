@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, './public/dist')));
 
 // Other modules: mongoose, routes, morgan, session
 var session = require('express-session');
-app.use(session({secret: 'loginRegistration'}));
+app.use(session({secret: 'loginRegistration', resave: true, saveUninitialized: true}));
 require('./server/config/mongoose.js');
 require('./server/config/routes.js')(app);
 // don't use morgan for now
